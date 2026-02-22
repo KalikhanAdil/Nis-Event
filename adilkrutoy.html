@@ -192,12 +192,16 @@
     /* list & card */
     .list{display:flex;flex-direction:column;gap:12px}
     .card{
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
       display:flex;justify-content:space-between;gap:12px;padding:14px;border-radius:14px;
       background:linear-gradient(180deg,#fff,#fbfdff);
       border:1px solid rgba(230,243,255,0.9);
-      transform:translateY(12px) scale(.995);opacity:0;
+      transform: translate3d(0,12px,0);opacity:0;
       transition: transform var(--motion-pop-duration) var(--motion-pop-ease), opacity var(--motion-pop-duration) ease, box-shadow 220ms ease;
-      will-change:transform,opacity;
+      will-change:transform;
       overflow:visible;
     }
     /* support stagger via CSS variable --i set from JS (ms) */
@@ -205,7 +209,10 @@
       transform:none; opacity:1; box-shadow: 0 18px 40px rgba(16,24,40,0.06);
       transition-delay: var(--i, 0ms);
     }
-    .card:hover{ transform:translateY(-6px) scale(1.01); box-shadow:0 26px 60px rgba(16,24,40,0.08) }
+    .card:hover{
+  transform: translate3d(0,-6px,0);   /* убрали scale → нет ресэмплинга */
+  box-shadow: 0 26px 60px rgba(16,24,40,0.08);
+}
     .card .meta{display:flex;flex-direction:column;gap:8px;min-width:60%}
     .card .meta strong{font-size:15px}
     .small{font-size:13px;color:var(--muted)}
@@ -1429,7 +1436,7 @@
   </svg>
 
 <div class="credits">
-  BrBrPatapim Team • Kalikhan Adil, Mamleeva Aurika, Lezhankova Safiya, Amangeldy Damir
+  BrBrPatapim Team • Kalikhan Adil, Mamleyeva Aurika, Lezhankina Safiya, Amangeldy Damir
 </div>
 </body>
 </html>
